@@ -15,6 +15,7 @@ module IDEX
     RS1addr_i,
     RS2addr_i,
     RDaddr_i,
+    IDEXenable_i,
     RegWrite_o,
     MemtoReg_o, 
     MemRead_o,
@@ -90,6 +91,20 @@ always @ ( posedge clk_i or negedge start_i) begin
         RS2addr_o <= 0;
         RDaddr_o <= 0;
     end
+    else if (IDEXEnable_i) begin
+        RegWrite_o <= RegWrite_o;
+        MemtoReg_o <= MemtoReg_o;
+        MemRead_o <= MemRead_o;
+        MemWrite_o <= MemWrite_o;
+        ALUSrc_o <= ALUSrc_o;
+        ALUOp_o <= ALUOp_o;
+        RS1data_o <= RS1data_o;
+        RS2data_o <= RS2data_o;
+        ImmGen_o <= ImmGen_o;
+        funct_7_3_o <= funct_7_3_o;
+        RS1addr_o <= RS1addr_o;
+        RS2addr_o <= RS2addr_o;
+        RDaddr_o <= RDaddr_o;
     else begin
         RegWrite_o <= RegWrite_i;
         MemtoReg_o <= MemtoReg_i;

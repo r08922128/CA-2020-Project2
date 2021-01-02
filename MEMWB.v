@@ -7,6 +7,7 @@ module MEMWB
 	ALUdata_i,
 	ReadData_i,
 	RDaddr_i,
+	MEMWBenable_i,
 	RegWrite_o,
 	MemtoReg_o,
 	ALUdata_o,
@@ -41,6 +42,13 @@ always @ ( posedge clk_i or negedge start_i) begin
 		ALUdata_o <= 0;
 		RDaddr_o <= 0;
   	end
+	else if (MEMWBenable_i) begin
+		RegWrite_o <= RegWrite_o;
+		MemtoReg_o <= MemtoReg_o;
+		ReadData_o <= ReadData_o;
+		ALUdata_o <= ALUdata_o;
+		RDaddr_o <= RDaddr_o;		
+	end
 	else begin
 		RegWrite_o <= RegWrite_i;
 		MemtoReg_o <= MemtoReg_i;

@@ -9,6 +9,7 @@ module EXMEM
     ALUdata_i,
     MemWdata_i,
     RDaddr_i, 
+    EXMEMenable_i,
     RegWrite_o,
     MemtoReg_o,
     MemRead_o,
@@ -52,6 +53,15 @@ always @ ( posedge clk_i or negedge start_i) begin
 		RDaddr_o <= 0;
 		MemWdata_o <= 0;
 	end
+    else if (EXMEMenable_i) begin
+		RegWrite_o <= RegWrite_o;
+		MemtoReg_o <= MemtoReg_o;
+		MemRead_o <= MemRead_o;
+		MemWrite_o <= MemWrite_o;
+		ALUdata_o <= ALUdata_o;
+		RDaddr_o <= RDaddr_o;
+		MemWdata_o <= MemWdata_o;        
+    end
 	else begin    
 		RegWrite_o <= RegWrite_i;
 		MemtoReg_o <= MemtoReg_i;
