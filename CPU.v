@@ -246,7 +246,7 @@ dcache_controller dcache
 
 	// to CPU interface
 	.cpu_data_i(EXMEM.MemWdata_o),
-	.cpu_addr_i(ALUresult),
+	.cpu_addr_i(EXMEM.ALUdata_o),
 	.cpu_MemRead_i(EXMEM.MemRead_o),
 	.cpu_MemWrite_i(EXMEM.MemWrite_o),
 	.cpu_data_o(),
@@ -268,7 +268,7 @@ MEMWB MEMWB(
 	.RegWrite_i (EXMEM.RegWrite_o),
 	.MemtoReg_i (EXMEM.MemtoReg_o),
     .ALUdata_i  (EXMEM.ALUdata_o),
-	.ReadData_i (Data_Memory.data_o),
+	.ReadData_i (dcache.data_o),
 	.RDaddr_i (EXMEM.RDaddr_o),
     .MEMWBenable_i(MemStall),
 	.RegWrite_o (),
