@@ -83,13 +83,15 @@ always@(*) begin
         end
         else begin
             hit_o=1'b0;
-            data_o=256'b0;
+            // data_o=256'b0;
+            data_o=data_i;
             tag_o=24'b0;
         end
     end
     else begin
         hit_o=1'b0;
-        data_o=256'b0;
+        // data_o=256'b0;
+        data_o=data_i;
         tag_o=24'b0;
     end
 
