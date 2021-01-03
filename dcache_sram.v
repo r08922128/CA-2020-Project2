@@ -71,12 +71,12 @@ end
 // TODO: tag_o=? data_o=? hit_o=?
 always@(*) begin
     if (enable_i) begin
-        if ((tag_i[22:0] == tag[addr_i][0][22:0]) && tag_i[24]) begin
+        if ((tag_i[22:0] == tag[addr_i][0][22:0]) && tag[addr_i][0][24]) begin
             hit_o=1'b1;
             data_o=data[addr_i][0];
             tag_o=tag[addr_i][0];
         end
-        else if ((tag_i[22:0] == tag[addr_i][1][22:0]) && tag_i[24]) begin
+        else if ((tag_i[22:0] == tag[addr_i][1][22:0]) && tag[addr_i][1][24]) begin
             hit_o=1'b1;
             data_o=data[addr_i][1];
             tag_o=tag[addr_i][1];

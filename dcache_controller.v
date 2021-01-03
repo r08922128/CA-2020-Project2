@@ -183,6 +183,7 @@ always@(posedge clk_i or posedge rst_i) begin
                 else begin                    // write allocate: write miss = read miss + write hit; read miss = read miss + read hit
                     // TODO: add your code here! 
                     mem_enable <= 1'b1;
+                    mem_write <= 1'b0;
                     state <= STATE_READMISS;
                 end
             end
