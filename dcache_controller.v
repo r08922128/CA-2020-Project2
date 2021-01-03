@@ -120,6 +120,7 @@ assign    cache_dirty  = write_hit;
 // TODO: add your code here!  (r_hit_data=...?)
 //assign r_hit_data = (hit) ? sram_cache_data : 256'b0;
 assign r_hit_data =sram_cache_data;
+integer i;
 // read data :  256-bit to 32-bit
 always@(cpu_offset or r_hit_data) begin
     // TODO: add your code here! (cpu_data=...?)
@@ -134,6 +135,10 @@ always@(cpu_offset or r_hit_data) begin
         5'd28: cpu_data <= r_hit_data[255:224];
         default: cpu_data <= r_hit_data[255:224];
     endcase
+	// for (i = 0 ; i < 32 ; i = i + 1)
+	// begin
+	// 	cpu_data[i] = r_hit_data[(cpu_offset >> 2) * 32 + i];
+	// end
 end
 
 
@@ -151,6 +156,11 @@ always@(cpu_offset or r_hit_data or cpu_data_i) begin
         5'd28: w_hit_data <= {cpu_data_i, r_hit_data[223:0]};
         default: w_hit_data <= {cpu_data_i, r_hit_data[223:0]};
     endcase
+	// w_hit_data = r_hit_data;
+	// for (i = 0 ; i < 32 ; i = i + 1)
+	// begin
+	// 	w_hit_data[(cpu_offset >> 2) * 32 + i] = cpu_data_i[i];
+	// end
 end
 
 
@@ -185,6 +195,7 @@ always@(posedge clk_i or posedge rst_i) begin
                     // TODO: add your code here! 
                     mem_enable <= 1'b1;
                     mem_write <= 1'b0;
+                     write_back <= 1'b0;
                     state <= STATE_READMISS;
                 end
             end
@@ -231,6 +242,7 @@ dcache_sram dcache_sram
     .data_i     (cache_sram_data),
     .enable_i   (cache_sram_enable),
     .write_i    (cache_sram_write),
+    .write_hit_i (write_hit),
     .tag_o      (sram_cache_tag),
     .data_o     (sram_cache_data),
     .hit_o      (hit)
