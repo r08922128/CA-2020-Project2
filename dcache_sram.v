@@ -51,15 +51,15 @@ always@(posedge clk_i or posedge rst_i) begin
     end
     if (enable_i && write_i) begin
         // TODO: Handle your write of 2-way associative cache + LRU here
-        if (use_rec[addr_i]==1'b0) begin
+        if (use_rec[addr_i]==1'b1) begin
             tag[addr_i][0]<=tag_i;
             data[addr_i][0]<=data_i;
-            //use_rec[addr_i]<=1'b1;
+            use_rec[addr_i]<=1'b0;
         end
         else begin //use_rec[addr_i][1]==1'b0
             tag[addr_i][1]<=tag_i;
             data[addr_i][1]<=data_i;
-            //use_rec[addr_i]<=1'b0;
+            use_rec[addr_i]<=1'b1;
         end
 
     end
