@@ -45,7 +45,7 @@ input [9:0] funct_7_3_i;
 input [4:0] RS1addr_i,
             RS2addr_i,
             RDaddr_i;
-
+input IDEXenable_i;
 output RegWrite_o,
        MemtoReg_o, 
        MemRead_o,
@@ -74,7 +74,6 @@ reg [4:0]   RS1addr_o,
             RS2addr_o,
             RDaddr_o;
 
-
 always @ ( posedge clk_i or negedge start_i) begin
     if (~start_i) begin
         RegWrite_o <= 0;
@@ -91,7 +90,7 @@ always @ ( posedge clk_i or negedge start_i) begin
         RS2addr_o <= 0;
         RDaddr_o <= 0;
     end
-    else if (IDEXEnable_i) begin
+    else if (IDEXenable_i) begin
         RegWrite_o <= RegWrite_o;
         MemtoReg_o <= MemtoReg_o;
         MemRead_o <= MemRead_o;
@@ -105,6 +104,7 @@ always @ ( posedge clk_i or negedge start_i) begin
         RS1addr_o <= RS1addr_o;
         RS2addr_o <= RS2addr_o;
         RDaddr_o <= RDaddr_o;
+    end
     else begin
         RegWrite_o <= RegWrite_i;
         MemtoReg_o <= MemtoReg_i;

@@ -28,6 +28,7 @@ input           clk_i,
 input [31:0]    ALUdata_i,
                 MemWdata_i;
 input [4:0]     RDaddr_i;
+input           EXMEMenable_i;
 output          RegWrite_o, 
                 MemtoReg_o, 
                 MemRead_o,
@@ -42,7 +43,6 @@ reg             RegWrite_o,
 reg [31:0]      ALUdata_o,
                 MemWdata_o;
 reg [4:0]       RDaddr_o;
-
 always @ ( posedge clk_i or negedge start_i) begin
 	if (~start_i) begin 
 		RegWrite_o <= 0;

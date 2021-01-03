@@ -2,7 +2,7 @@ module CPU
 (
     clk_i, 
     rst_i,
-    start_i
+    start_i,
     // Data Memory interface
     mem_data_i,
     mem_ack_i,
@@ -41,7 +41,8 @@ PC PC(
     .clk_i      (clk_i),
     .rst_i      (rst_i),
     .start_i    (start_i),
-    .PCWrite_i  (Hazard_Detection.PCWrite_o | MemStall),
+    .stall_i    (MemStall),
+    .PCWrite_i  (Hazard_Detection.PCWrite_o),
     .pc_i       (MUX_PCSrc.data_o),
     .pc_o       (PC_addr)
 );
@@ -268,7 +269,7 @@ MEMWB MEMWB(
 	.RegWrite_i (EXMEM.RegWrite_o),
 	.MemtoReg_i (EXMEM.MemtoReg_o),
     .ALUdata_i  (EXMEM.ALUdata_o),
-	.ReadData_i (dcache.data_o),
+	.ReadData_i (dcache.cpu_data_o),
 	.RDaddr_i (EXMEM.RDaddr_o),
     .MEMWBenable_i(MemStall),
 	.RegWrite_o (),
