@@ -62,12 +62,12 @@ always@(posedge clk_i or posedge rst_i) begin
             if (hit_0) begin
                 tag[addr_i][0]=tag_i;
                 data[addr_i][0]=data_i;   
-                tag_o[23]=1'b1;
+
             end
             else if (hit_1) begin
                 tag[addr_i][1]=tag_i;
                 data[addr_i][1]=data_i;
-                tag_o[23]=1'b1; 
+
             end
         end
         else begin
@@ -75,13 +75,13 @@ always@(posedge clk_i or posedge rst_i) begin
                 tag[addr_i][0]=tag_i;
                 data[addr_i][0]=data_i;
                 use_next[addr_i]=1'b1;
-                tag_o[23]=1'b1;
+
             end
             else if (use_next[addr_i]==1'b1) begin //use_rec[addr_i][1]==1'b0
                 tag[addr_i][1]=tag_i;
                 data[addr_i][1]=data_i;
                 use_next[addr_i]=1'b0;
-                tag_o[23]=1'b1;
+
             end
         end
 
@@ -108,7 +108,12 @@ always@(*) begin
             hit_o<=1'b0;
             // data_o=256'b0;
             data_o<=data_i;
-            tag_o<=tag_i;
+            if (use_next[addr_i]==1'b1) begin
+                tag_o<=tag[addr_i][1];
+            end
+            else begin
+                tag_o<=tag[addr_i][0];
+            end
         end
     end
     
