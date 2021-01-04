@@ -107,12 +107,24 @@ always@(*) begin
         else begin
             hit_o<=1'b0;
             // data_o=256'b0;
-            data_o<=data_i;
+            //data_o<=data_i;
             if (use_next[addr_i]==1'b1) begin
                 tag_o<=tag[addr_i][1];
+                if (data[addr_i][1]==0) begin
+                    data_o<=data_i;
+                end
+                else begin
+                    data_o<=data[addr_i][1];
+                end
             end
             else begin
                 tag_o<=tag[addr_i][0];
+                if (data[addr_i][0]==0) begin
+                    data_o<=data_i;
+                end
+                else begin
+                    data_o<=data[addr_i][0];
+                end
             end
         end
     end
