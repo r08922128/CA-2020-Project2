@@ -153,6 +153,7 @@ always@(posedge Clk) begin
     
     // print Data Cache Status
     // DO NOT CHANGE THE OUTPUT FORMAT
+    //$fdisplay(outfile2, "%d %d %d", CPU.dcache.cpu_stall_o, CPU.dcache.state, CPU.dcache.sram_dirty);
     if(CPU.dcache.cpu_stall_o && CPU.dcache.state==0) begin
         if(CPU.dcache.sram_dirty) begin
             if(CPU.dcache.cpu_MemWrite_i) 

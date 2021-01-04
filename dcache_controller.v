@@ -195,7 +195,7 @@ always@(posedge clk_i or posedge rst_i) begin
                     // TODO: add your code here! 
                     mem_enable <= 1'b1;
                     mem_write <= 1'b0;
-                     write_back <= 1'b0;
+                    write_back <= 1'b0;
                     state <= STATE_READMISS;
                 end
             end
